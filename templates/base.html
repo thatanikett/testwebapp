@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      NexusOps | Modern Deployment Platform {% block title %}{% endblock %}
+      RetroTech | Low-Tech Community Hub {% block title %}{% endblock %}
     </title>
-    <!-- Modern Typefaces -->
+    <!-- Retro Typefaces -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
     <!-- Custom CSS -->
@@ -19,15 +19,14 @@
       href="{{ url_for('static', filename='style.css') }}"
     />
   </head>
-  <body class="dark-mode">
-    <!-- Background dynamic gradient -->
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
+  <body class="retro-mode">
+    <!-- Retro Border -->
+    <div class="retro-border"></div>
 
-    <!-- Glassmorphic Navbar -->
-    <nav class="navbar glass">
+    <!-- Text-based Navbar -->
+    <nav class="navbar retro-nav">
       <div class="nav-container">
-        <a href="/" class="brand">Nexus<span>Ops</span></a>
+        <a href="/" class="brand">[ RETRO<span>TECH </span>]</a>
         <ul class="nav-links">
           <li>
             <a href="/" class="{{ 'active' if request.path == '/' else '' }}"
@@ -57,7 +56,8 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p>&copy; 2026 NexusOps by Aniket. Cloud Native Deployments.</p>
+      <p>&copy; 2026 RetroTech Community. Built by Indies, For Indies.</p>
+      <p class="ascii-art">~*~ Low-Tech, No Corporate Bloat ~*~</p>
     </footer>
 
     <!-- Custom Micro-animations JS -->

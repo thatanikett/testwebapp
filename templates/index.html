@@ -1,49 +1,42 @@
 {% extends "base.html" %} {% block title %} - Home{% endblock %} {% block
 content %}
-<section class="hero slide-up">
+<section class="hero retro-hero slide-up">
   <div class="hero-content">
-    <h1 class="font-outfit text-gradient">Ship Code. Zero Downtime.</h1>
-    <p class="font-inter lead-text">
-      Experience next-generation AWS Blue/Green deployments. Designed for high
-      availability, zero friction, and absolute reliability.
+    <h1 class="font-retro text-retro">>>> BUILD. SHARE. TINKER. <<<</h1>
+    <p class="font-mono lead-text">
+      Welcome to the RetroTech Community. A low-tech space for indie builders,
+      makers, and enthusiasts. No cloud bloat. No corporate speak. Just pure,
+      simple technology celebrating what makes computing beautiful.
     </p>
     <div class="cta-group">
-      <a href="/features" class="btn btn-primary glow-button">
-        Explore Features <span class="arrow">&rarr;</span>
-      </a>
-      <a
-        href="https://aws.amazon.com/devops/"
-        target="_blank"
-        class="btn btn-secondary glass"
-      >
-        View Documentation
-      </a>
+      <a href="/features" class="btn btn-retro-primary"> FEATURES ▶ </a>
+      <a href="/about" class="btn btn-retro-secondary"> ABOUT US </a>
     </div>
   </div>
 
   <div class="hero-visual fade-in">
-    <div class="hero-image-wrapper tilt-effect glass">
+    <div class="retro-box">
       <img
-        src="{{ url_for('static', filename='hero_graphic.png') }}"
-        alt="CloudOps Dashboard Visualization"
-        class="responsive-hero-img"
+        src="{{ url_for('static', filename='surfing-nyan-cat.gif') }}"
+        alt="Nyan Cat surfing the retro web"
+        class="retro-gif"
       />
     </div>
   </div>
 </section>
 
-<section class="stats slide-up-delayed">
-  <div class="stat-card glass">
-    <h3 class="font-outfit text-gradient">99.99%</h3>
-    <p class="font-inter">Availability Guarantee</p>
+<section class="stats retro-stats slide-up-delayed">
+  <div class="stat-card retro-card">
+    <h3 class="stat-number">∞</h3>
+    <p class="font-mono">Creative Freedom</p>
   </div>
-  <div class="stat-card glass">
-    <h3 class="font-outfit text-gradient">Zero</h3>
-    <p class="font-inter">Traffic Drops</p>
+  <div class="stat-card retro-card">
+    <h3 class="stat-number">100%</h3>
+    <p class="font-mono">Community Driven</p>
   </div>
-  <div class="stat-card glass">
-    <h3 class="font-outfit text-gradient">200ms</h3>
-    <p class="font-inter">Rollback Time</p>
+  <div class="stat-card retro-card">
+    <h3 class="stat-number">0</h3>
+    <p class="font-mono">Pay Walls</p>
   </div>
 </section>
 {% endblock %}
