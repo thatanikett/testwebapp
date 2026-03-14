@@ -14,10 +14,14 @@ def features():
 def about():
     return render_template('about.html')
 
+
 @app.route('/health')
 def health():
-    # A simple 200 OK health check for AWS
-    return {"status": "Healthy", "version": "v1.0.0"}, 200
+    try:
+        render_template('index.html')  
+        return {"status": "healthy", "version": "v1.0.0"}, 200
+    except Exception as e:
+        return {"status": "unhealthy", "error": str(e)}, 500
     
 
 @app.route('/simulate-error')
