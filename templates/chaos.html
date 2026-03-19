@@ -1,0 +1,217 @@
+{% extends "base.html" %} {% block title %} - Fault Injection{% endblock %} {%
+block content %}
+
+<section class="chaos-container retro-hero slide-up">
+  <div class="chaos-header">
+    <h1 class="font-retro text-retro">>>> FAULT INJECTION <<<</h1>
+    <p class="font-mono lead-text">
+      Test system resilience through controlled fault injection. Deploy chaos,
+      measure recovery.
+    </p>
+  </div>
+
+  <div class="chaos-info retro-card">
+    <div class="info-box">
+      <h3 class="font-mono">[ SYSTEM DETAILS ]</h3>
+      <p class="font-mono"><strong>Instance ID:</strong> {{ instance_id }}</p>
+      <p class="font-mono"><strong>Availability Zone:</strong> {{ az }}</p>
+    </div>
+  </div>
+
+  <div class="chaos-controls">
+    <h2 class="font-retro">[ FAULT INJECTION ]</h2>
+
+    <div class="controls-grid">
+      <div class="fault-card retro-card">
+        <h3 class="font-retro">CPU SPIKE</h3>
+        <p class="font-mono description">Stress test CPU with sustained load</p>
+        <button class="btn btn-chaos-cpu" onclick="trigger('cpu')">
+          ▶ TRIGGER STRESS
+        </button>
+      </div>
+
+      <div class="fault-card retro-card">
+        <h3 class="font-retro">KILL APP</h3>
+        <p class="font-mono description">Terminate Flask application</p>
+        <button class="btn btn-chaos-kill" onclick="trigger('app')">
+          ▶ TERMINATE
+        </button>
+      </div>
+
+      <div class="fault-card retro-card">
+        <h3 class="font-retro">KILL NGINX</h3>
+        <p class="font-mono description">Shutdown web server</p>
+        <button class="btn btn-chaos-kill" onclick="trigger('nginx')">
+          ▶ TERMINATE
+        </button>
+      </div>
+
+      <div class="fault-card retro-card">
+        <h3 class="font-retro">GENERATE 5XX</h3>
+        <p class="font-mono description">Trigger HTTP 500 error</p>
+        <button class="btn btn-chaos-kill" onclick="trigger('error')">
+          ▶ SIMULATE ERROR
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="chaos-status retro-card">
+    <p class="font-mono">💬 Status: Ready for chaos testing</p>
+    <p class="font-mono text-muted">
+      ⚠️ Use with caution in production environments
+    </p>
+  </div>
+</section>
+
+<style>
+  .chaos-container {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .chaos-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .chaos-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .chaos-header .lead-text {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .chaos-info {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 2px solid #2d2d2d;
+    text-align: left;
+  }
+
+  .info-box h3 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    text-decoration: underline;
+  }
+
+  .info-box p {
+    margin: 0.5rem 0;
+    word-break: break-all;
+  }
+
+  .chaos-controls {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+  }
+
+  .chaos-controls h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .controls-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .fault-card {
+    padding: 1.5rem;
+    border: 2px solid #2d2d2d;
+    text-align: center;
+    background: #fffaf0;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .fault-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #d4572a;
+  }
+
+  .fault-card .description {
+    color: #4a4a4a;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-chaos-cpu {
+    background-color: #f39c12;
+    color: #2d2d2d;
+    border: 2px solid #2d2d2d;
+    padding: 0.8rem 1.5rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-chaos-cpu:hover {
+    background-color: #e67e22;
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-chaos-kill {
+    background-color: #c0392b;
+    color: #fff;
+    border: 2px solid #2d2d2d;
+    padding: 0.8rem 1.5rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-chaos-kill:hover {
+    background-color: #a93226;
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .chaos-status {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 2px solid #2d2d2d;
+    text-align: center;
+    background: #fffaf0;
+  }
+
+  .chaos-status p {
+    margin: 0.5rem 0;
+  }
+</style>
+
+<script>
+  function trigger(type) {
+    const messages = {
+      cpu: "Inject CPU stress for 60 seconds?",
+      app: "Kill Flask application?",
+      nginx: "Kill Nginx server?",
+      error: "Generate 5XX error?",
+    };
+
+    if (confirm(messages[type])) {
+      const endpoint =
+        type === "error" ? "/simulate-error" : "/inject-fault/" + type;
+      fetch(endpoint)
+        .then((res) => res.json())
+        .then((data) =>
+          alert(data.message || data.error || "Fault injected successfully"),
+        )
+        .catch((err) => alert("ERROR: Failed to connect to API"));
+    }
+  }
+</script>
+
+{% endblock %}
