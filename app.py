@@ -7,12 +7,22 @@ ssm = boto3.client('ssm', region_name='ap-south-1')
 
 def get_metadata(path):
     try:
-        # 2-second timeout to prevent hang
-        # The IP is a link-local address,specifically for metadata. It is unroutable
-        r = requests.get(f"http://169.254.169.254/latest/meta-data/{path}", timeout=2)
-        return r.text
+        # Get Token
+        token = requests.put(
+            "http://169.254.169.254/latest/api/token", 
+            headers={"X-aws-ec2-metadata-token-ttl-seconds": "21600"}, 
+            timeout=2
+        ).text
+        # Fetch metadata with Token
+        r = requests.get(
+            f"http://169.254.169.254/latest/meta-data/{path}", 
+            headers={"X-aws-ec2-metadata-token": token},
+            timeout=2
+        )
+        return r.text if r.status_code == 200 else "local-dev"
     except:
         return "local-dev"
+
 
 @app.route('/')
 def home():
